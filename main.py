@@ -190,7 +190,20 @@ def main():
     # Data loading code
     traindir = os.path.join(args.data, 'train')
     valdir = os.path.join(args.data, 'val')
-    train_transforms, val_transforms, evaluate_transforms = preprocess_strategy(args.benchmark)
+    normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                     std=[0.229, 0.224, 0.225])
+    train_transforms = transforms.Compose([
+            transforms.Resize((448,448)),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            normalize,
+        ])
+    val_transforms = transforms.Compose([
+            transforms.Resize((448,448)),
+            transforms.ToTensor(),
+            normalize,
+        ])
+    evaluate_transforms = None
 
     train_dataset = datasets.ImageFolder(
         traindir,

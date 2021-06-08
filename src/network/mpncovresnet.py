@@ -1,3 +1,4 @@
+import os
 import torch.nn as nn
 import math
 import torch.utils.model_zoo as model_zoo
@@ -91,7 +92,7 @@ def mpncovresnet50(pretrained=False, **kwargs):
     """
     model = MPNCOVResNet(Bottleneck, [3, 4, 6, 3], **kwargs)
     if pretrained:
-        model.load_state_dict(model_zoo.load_url(model_urls['mpncovresnet50']))
+        model.load_state_dict(os.environ.get('R50'))
     return model
 
 
@@ -105,5 +106,3 @@ def mpncovresnet101(pretrained=False, **kwargs):
     if pretrained:
         model.load_state_dict(model_zoo.load_url(model_urls['mpncovresnet101']))
     return model
-
-
