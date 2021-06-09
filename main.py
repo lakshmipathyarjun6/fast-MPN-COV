@@ -208,6 +208,8 @@ def main():
     train_dataset = datasets.ImageFolder(
         traindir,
         train_transforms)
+    with open('classes.txt', 'w') as f:
+        f.write(str(train_dataset.classes))
 
     if args.distributed:
         train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset)
