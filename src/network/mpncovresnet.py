@@ -92,7 +92,7 @@ def mpncovresnet50(pretrained=False, **kwargs):
     """
     model = MPNCOVResNet(Bottleneck, [3, 4, 6, 3], **kwargs)
     if pretrained:
-        model.load_state_dict(os.environ.get('R50'))
+        model.load_state_dict(torch.load(os.environ.get('R50')))
     return model
 
 
