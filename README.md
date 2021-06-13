@@ -179,10 +179,9 @@ For making our Fast MPN-COV meta layer can be added in a network conveniently, w
 
 ## Installation and Usage
 
-1. Install [PyTorch](https://github.com/pytorch/pytorch) (0.4.0 or above)
-2. type `git clone https://github.com/jiangtaoxie/fast-MPN-COV`
-3. `pip install -r requirements.txt`
-4. prepare the dataset as follows
+1. Clone this repository
+2. `pip install -r requirements.txt`
+3. prepare the dataset as follows
 ```
 .
 ├── train
