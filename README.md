@@ -172,7 +172,7 @@ For making our Fast MPN-COV meta layer can be added in a network conveniently, w
 ```
 ##### For more convenient training and finetuning, we
 
--  implement some functions for plotting convergence curve.  
+-  implement some functions for plotting convergence curve.
 -  adopt network visualization tool [pytorchviz](https://github.com/szagoruyko/pytorchviz) for plotting network structure.
 - use shell file to manage the process.
 
@@ -212,9 +212,11 @@ For making our Fast MPN-COV meta layer can be added in a network conveniently, w
 3. `sh train.sh`
 
 #### for finetuning our fast MPN-COV model
-1. `cp finetune/finetune.sh ./`
-2.  modify the dataset path in `finetune.sh`
-3. `sh finetune.sh`
+1.  Download the initial weights from [here](https://drive.google.com/open?id=19TWen7p9UDyM0Ueu9Gb22NtouR109C6j)
+2.  export R50=/the/path/to/mpncovresnet50-15991845.pth
+3. `cp finetune/finetune.sh ./`
+4.  modify the dataset path in `finetune.sh`
+5. `sh finetune.sh`
 
 #### for finetuning VGG-model by using BCNN
 1. `cp finetune/two_stage_finetune.sh ./`
