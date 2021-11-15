@@ -1,3 +1,7 @@
 # Do not upload huge models or data
 trained_models/
 data/
+src/
+Results/
+
+__pycache__/
