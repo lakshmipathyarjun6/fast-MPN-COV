@@ -134,6 +134,9 @@ def main():
                       args.num_classes,
                       args.freezed_layer,
                       pretrained=args.pretrained)
+
+    num_classes = args.num_classes
+
     # plot network
     vizNet(model, args.modeldir)
     # obtain learning rate
@@ -234,8 +237,8 @@ def main():
 
     if args.evaluate:
         if evaluate_transforms is not None:
-            validate(evaluate_loader, model, criterion)
-        validate(val_loader, model, criterion)
+            validate(evaluate_loader, model, criterion, num_classes)
+        validate(val_loader, model, criterion, num_classes)
         return
     # make directory for storing checkpoint files
     if os.path.exists(args.modeldir) is not True:
@@ -246,9 +249,9 @@ def main():
             train_sampler.set_epoch(epoch)
         adjust_learning_rate(optimizer, LR.lr_factor, epoch)
         # train for one epoch
-        trainObj, top1, top5 = train(train_loader, model, criterion, optimizer, epoch)
+        trainObj, top1, top5 = train(train_loader, model, criterion, optimizer, epoch, num_classes)
         # evaluate on validation set
-        valObj, prec1, prec5 = validate(val_loader, model, criterion)
+        valObj, prec1, prec5 = validate(val_loader, model, criterion, num_classes)
         # update stats
         stats_._update(trainObj, top1, top5, valObj, prec1, prec5)
         # remember best prec@1 and save checkpoint
@@ -276,12 +279,12 @@ def main():
         print("=> start evaluation")
         best_model = torch.load(model_file)
         model.load_state_dict(best_model['state_dict'])
-        validate(evaluate_loader, model, criterion)
+        validate(evaluate_loader, model, criterion, num_classes)
 
 
 
 
-def train(train_loader, model, criterion, optimizer, epoch):
+def train(train_loader, model, criterion, optimizer, epoch, num_classes):
     batch_time = AverageMeter()
     data_time = AverageMeter()
     losses = AverageMeter()
@@ -305,7 +308,7 @@ def train(train_loader, model, criterion, optimizer, epoch):
         loss = criterion(output, target)
 
         # measure accuracy and record loss
-        prec1, prec5 = accuracy(output, target, topk=(1, 5))
+        prec1, prec5 = accuracy(output, target, topk=(1, min(num_classes, 5)))
         losses.update(loss.item(), input.size(0))
         top1.update(prec1[0], input.size(0))
         top5.update(prec5[0], input.size(0))
@@ -331,7 +334,7 @@ def train(train_loader, model, criterion, optimizer, epoch):
     return losses.avg, top1.avg, top5.avg
 
 
-def validate(val_loader, model, criterion):
+def validate(val_loader, model, criterion, num_classes):
     batch_time = AverageMeter()
     losses = AverageMeter()
     top1 = AverageMeter()
@@ -359,7 +362,7 @@ def validate(val_loader, model, criterion):
             loss = criterion(output, target)
 
             # measure accuracy and record loss
-            prec1, prec5 = accuracy(output, target, topk=(1, 5))
+            prec1, prec5 = accuracy(output, target, topk=(1, min(num_classes, 5)))
             losses.update(loss.item(), input.size(0))
             top1.update(prec1[0], input.size(0))
             top5.update(prec5[0], input.size(0))
