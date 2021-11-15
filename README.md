@@ -234,3 +234,29 @@ For making our Fast MPN-COV meta layer can be added in a network conveniently, w
 **If you have any questions or suggestions, please contact me**
 
 `jiangtaoxie@mail.dlut.edu.cn`
+
+## On FORK by lakshmipathyarjun6
+
+To install on cloudlet from scratch:
+
+1. Clone this repository (git clone --recursive https://github.com/lakshmipathyarjun6/fast-MPN-COV)
+
+2. Navigate to the cloned repository (cd fast-MPN-COV)
+
+3. Build the Docker container (docker build -f Dockerfile -t mpnc .)
+
+FOR TRAINING:
+
+5. (Local) Load the dataset from local (scp -r /path/to/local/top_folder project821@cloudlet032.elijah.cs.cmu.edu:~)
+
+6. Load the pretrained model (scp -r /path/to/local/mpncovresnet50-15991845.pth project821@cloudlet032.elijah.cs.cmu.edu:~)
+
+7. (Cloudlet) Move the dataset into the correct folder (cd fast-MPN-COV && mkdir data && cd data && mv DATASET_FOLDER data/)
+
+8. Move the existing model into the correct folder (cd fast-MPN-COV && mkdir trained_models && cd trained_models && mv MODEL trained_models/)
+
+8. Start the container with volume mounts from HOME DIRECTORY (docker run -it -v "$(pwd)"/fast-MPN-COV/:/workspace/fmpnc mpnc)
+
+9. (In container) Set the path of the pretrained model environment variable (export R50=/workspace/fmnpc/trained_models/mpncovresnet50-15991845.pth)
+
+10. ENSURE THAT PROCESS IS BEING RUN IN TMUX SESSION!!! Then start training (cd fmpnc && sh finetune.sh)
