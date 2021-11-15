@@ -249,11 +249,11 @@ FOR TRAINING:
 
 5. (Local) Load the dataset from local (scp -r /path/to/local/top_folder project821@cloudlet032.elijah.cs.cmu.edu:~)
 
-6. Load the pretrained model (scp -r /path/to/local/mpncovresnet50-15991845.pth project821@cloudlet032.elijah.cs.cmu.edu:~)
+6. Load the pretrained model (scp /path/to/local/mpncovresnet50-15991845.pth project821@cloudlet032.elijah.cs.cmu.edu:~)
 
 7. (Cloudlet) Move the dataset into the correct folder (cd fast-MPN-COV && mkdir data && cd data && mv DATASET_FOLDER data/)
 
-8. Move the existing model into the correct folder (cd fast-MPN-COV && mkdir trained_models && cd trained_models && mv MODEL trained_models/)
+8. Move the existing model into the correct folder (cd fast-MPN-COV && mkdir trained_models && cd trained_models && mv MODEL .)
 
 8. Start the container with volume mounts from HOME DIRECTORY (docker run -it -v "$(pwd)"/fast-MPN-COV/:/workspace/fmpnc mpnc)
 
