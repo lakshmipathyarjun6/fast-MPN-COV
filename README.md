@@ -257,6 +257,6 @@ FOR TRAINING:
 
 8. Start the container with volume mounts from HOME DIRECTORY (docker run -it -v "$(pwd)"/fast-MPN-COV/:/workspace/fmpnc mpnc)
 
-9. (In container) Set the path of the pretrained model environment variable (export R50=/workspace/fmnpc/trained_models/mpncovresnet50-15991845.pth)
+9. (In container) Set the path of the pretrained model environment variable (export R50=/workspace/fmpnc/trained_models/mpncovresnet50-15991845.pth)
 
 10. ENSURE THAT PROCESS IS BEING RUN IN TMUX SESSION!!! Then start training (cd fmpnc && sh finetune.sh)
