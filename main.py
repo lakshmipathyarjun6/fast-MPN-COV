@@ -134,6 +134,9 @@ def main():
                       args.num_classes,
                       args.freezed_layer,
                       pretrained=args.pretrained)
+
+    num_classes = args.num_classes
+
     # plot network
     vizNet(model, args.modeldir)
     # obtain learning rate
@@ -281,7 +284,7 @@ def main():
 
 
 
-def train(train_loader, model, criterion, optimizer, epoch):
+def train(train_loader, model, criterion, optimizer, epoch, num_classes):
     batch_time = AverageMeter()
     data_time = AverageMeter()
     losses = AverageMeter()
@@ -305,7 +308,7 @@ def train(train_loader, model, criterion, optimizer, epoch):
         loss = criterion(output, target)
 
         # measure accuracy and record loss
-        prec1, prec5 = accuracy(output, target, topk=(1, 5))
+        prec1, prec5 = accuracy(output, target, topk=(1, min(num_classes, 5)))
         losses.update(loss.item(), input.size(0))
         top1.update(prec1[0], input.size(0))
         top5.update(prec5[0], input.size(0))
@@ -331,7 +334,7 @@ def train(train_loader, model, criterion, optimizer, epoch):
     return losses.avg, top1.avg, top5.avg
 
 
-def validate(val_loader, model, criterion):
+def validate(val_loader, model, criterion, num_classes):
     batch_time = AverageMeter()
     losses = AverageMeter()
     top1 = AverageMeter()
@@ -359,7 +362,7 @@ def validate(val_loader, model, criterion):
             loss = criterion(output, target)
 
             # measure accuracy and record loss
-            prec1, prec5 = accuracy(output, target, topk=(1, 5))
+            prec1, prec5 = accuracy(output, target, topk=(1, min(num_classes, 5)))
             losses.update(loss.item(), input.size(0))
             top1.update(prec1[0], input.size(0))
             top5.update(prec5[0], input.size(0))

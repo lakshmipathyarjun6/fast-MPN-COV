@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:latest
+FROM nvcr.io/nvidia/pytorch:20.09-py3
 
 ARG DEBIAN_FRONTEND=noninteractive
 

@@ -39,7 +39,7 @@ description=reproduce
 #*******************Dataset*******************
 #Choose the dataset folder
 benchmark=combinedsmall34
-datadir=/workspace/fmnpc/data
+datadir=/workspace/fmpnc/data
 dataset=$datadir/$benchmark
 num_classes=2
 #*********************************************
