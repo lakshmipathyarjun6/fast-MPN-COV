@@ -251,7 +251,7 @@ FOR TRAINING:
 
 6. Load the pretrained model (scp /path/to/local/mpncovresnet50-15991845.pth project821@cloudlet032.elijah.cs.cmu.edu:~)
 
-7. (Cloudlet) Move the dataset into the correct folder (cd fast-MPN-COV && mkdir data && cd data && mv DATASET_FOLDER data/)
+7. (Cloudlet) Move the dataset into the correct folder (cd fast-MPN-COV && mkdir data && cd data && mv DATASET_FOLDER .)
 
 8. Move the existing model into the correct folder (cd fast-MPN-COV && mkdir trained_models && cd trained_models && mv MODEL .)
 
