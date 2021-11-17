@@ -259,4 +259,6 @@ FOR TRAINING:
 
 9. (In container) Set the path of the pretrained model environment variable (export R50=/workspace/fmpnc/trained_models/mpncovresnet50-15991845.pth)
 
-10. ENSURE THAT PROCESS IS BEING RUN IN TMUX SESSION!!! Then start training (cd fmpnc && sh finetune.sh)
+10. Change the benchmark and num_classes variables in finetune.sh to the correct values.
+
+11. ENSURE THAT PROCESS IS BEING RUN IN TMUX SESSION!!! Then start training (cd fmpnc && sh finetune.sh)
